@@ -77,6 +77,8 @@ class SnakeNavigationBar extends StatelessWidget {
   /// BottomNavigationBar height default is [kBottomNavigationBarHeight]
   final double height;
 
+  final List<int> unAnimatedItems;
+
   SnakeNavigationBar._(
     this._selectionStyle, {
     Key? key,
@@ -97,6 +99,7 @@ class SnakeNavigationBar extends StatelessWidget {
     this.shadowColor = Colors.black,
     this.selectedLabelStyle,
     this.unselectedLabelStyle,
+    this.unAnimatedItems = const [],
     required this.height,
   })  : showSelectedLabels =
             (snakeShape.type == SnakeShapeType.circle && showSelectedLabels)
@@ -123,6 +126,7 @@ class SnakeNavigationBar extends StatelessWidget {
     Color shadowColor = Colors.black,
     TextStyle? selectedLabelStyle,
     TextStyle? unselectedLabelStyle,
+    List<int> unAnimatedItems = const [],
     double? height,
   }) =>
       SnakeNavigationBar._(
@@ -146,6 +150,7 @@ class SnakeNavigationBar extends StatelessWidget {
         selectedLabelStyle: selectedLabelStyle,
         unselectedLabelStyle: unselectedLabelStyle,
         height: height ?? kBottomNavigationBarHeight,
+        unAnimatedItems: unAnimatedItems,
       );
 
   factory SnakeNavigationBar.gradient({
@@ -168,6 +173,7 @@ class SnakeNavigationBar extends StatelessWidget {
     TextStyle? selectedLabelStyle,
     TextStyle? unselectedLabelStyle,
     double? height,
+    List<int> unAnimatedItems = const [],
   }) =>
       SnakeNavigationBar._(
         SelectionStyle.gradient,
@@ -190,6 +196,7 @@ class SnakeNavigationBar extends StatelessWidget {
         selectedLabelStyle: selectedLabelStyle,
         unselectedLabelStyle: unselectedLabelStyle,
         height: height ?? kBottomNavigationBarHeight,
+        unAnimatedItems: unAnimatedItems,
       );
 
   SnakeBottomBarThemeData _createTheme(BuildContext context) {
@@ -227,7 +234,7 @@ class SnakeNavigationBar extends StatelessWidget {
         behaviour: behaviour,
         items: items,
         height: height,
-        notifier: SelectionNotifier(currentIndex, onTap),
+        notifier: SelectionNotifier(currentIndex, onTap, unAnimatedItems),
       ),
     );
   }
