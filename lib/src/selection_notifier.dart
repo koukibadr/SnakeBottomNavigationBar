@@ -9,11 +9,11 @@ class SelectionNotifier extends ChangeNotifier {
   SelectionNotifier(this.currentIndex, this.onTap, this.unAnimatedItems);
 
   void selectIndex(int index) {
-    lastIndex = currentIndex;
+    onTap?.call(index);
     if (!unAnimatedItems.contains(index)) {
       currentIndex = index;
+      lastIndex = currentIndex;
+      notifyListeners();
     }
-    onTap?.call(index);
-    notifyListeners();
   }
 }
