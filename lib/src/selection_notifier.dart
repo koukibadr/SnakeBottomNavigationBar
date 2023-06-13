@@ -11,8 +11,8 @@ class SelectionNotifier extends ChangeNotifier {
   void selectIndex(int index) {
     onTap?.call(index);
     if (!unAnimatedItems.contains(index)) {
-      currentIndex = index;
       lastIndex = currentIndex;
+      currentIndex = index;
       notifyListeners();
     }
   }
